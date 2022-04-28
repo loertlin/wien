@@ -33,7 +33,7 @@ let layerControl = L.control.layers({
 }).addTo(map); 
 
 
-/*damit contorl gelich schon ausgerollt ist*/
+/*damit control gleich schon ausgerollt ist*/
 layerControl.expand();
 
 let sightLayer = L.featureGroup();
@@ -43,4 +43,7 @@ let mrk = L.marker([stephansdom.lat, stephansdom.lng]).addTo(sightLayer)
 
 sightLayer.addTo(map);
 
-L.control.scale().addTo(map);
+/*Maßstab hinzugefügt */
+L.control.scale({
+    imperial: false
+}).addTo(map);

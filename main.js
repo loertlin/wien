@@ -19,4 +19,10 @@ let map = L.map("map", {
 
 let layerControl = L.control.layers({
     "BasemapAT Grau": startLayer, 
+    "Basemap Standard": L.tileLayer.provider("BasemapAT.basemap"),
+    "Basemap Overlay": L.tileLayer.provider("BasemapAT.overlay"),
+    "Basemap Terrain": L.tileLayer.provider("BasemapAT.terrain"),
+    "Basemap Surface": L.tileLayer.provider("BasemapAT.surface"),
+    "Basemap HighDPI": L.tileLayer.provider("BasemapAT.highdpi"),
+    "Basemap Orthofoto": L.tileLayer.provider("BasemapAT.orthofoto"),
 }).addTo(map); 

@@ -31,3 +31,8 @@ let layerControl = L.control.layers({
     ])
 
 }).addTo(map); 
+
+
+/*damit contorl gelich schon ausgerollt ist*/
+layerControl.expand();
+

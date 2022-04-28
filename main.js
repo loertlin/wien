@@ -23,6 +23,11 @@ let layerControl = L.control.layers({
     "Basemap Overlay": L.tileLayer.provider("BasemapAT.overlay"),
     "Basemap Terrain": L.tileLayer.provider("BasemapAT.terrain"),
     "Basemap Surface": L.tileLayer.provider("BasemapAT.surface"),
-    "Basemap HighDPI": L.tileLayer.provider("BasemapAT.highdpi"),
+    "Basemap High-DPI": L.tileLayer.provider("BasemapAT.highdpi"),
     "Basemap Orthofoto": L.tileLayer.provider("BasemapAT.orthofoto"),
+    "Basemap mit Orthophoto und Beschriftung": L.layerGroup([
+        L.tileLayer.provider("BasemapAT.orthofoto"),
+        L.tileLayer.provider("BasemapAT.overlay"),
+    ])
+
 }).addTo(map); 

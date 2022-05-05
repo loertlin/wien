@@ -71,7 +71,21 @@ async function loadSites(url) {
     layerControl.addOverlay(overlay, "Sehenswürdigkeiten");
     overlay.addTo(map);
 
-    L.geoJSON(geojson).addTo(overlay);
+    L.geoJSON(geojson, {
+        pointToLayer: function(geoJsonPoint, latlng) {
+            //console.log(geoJsonPoint.properties.NAME);
+            let popup = `
+                <img src="${geoJsonPoint.properties.THUMBNAIL}"
+                alt = ""><br>
+                <strong>${geoJsonPoint.properties.NAME}</strong>
+                <hr>
+                Adresse: ${geoJsonPoint.properties.Adresse}<br>
+                <a href="${geoJsonPoint.properties.WEITERE_INFO}">Weblink</a>
+            `;
+            return L.Marker(latlng).bindPopup(popup);
+        }
+
+    }).addTo(overlay);
 }
 loadSites("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
 
@@ -90,12 +104,8 @@ async function loadStops(url) {
     let overlay = L.featureGroup();
     layerControl.addOverlay(overlay, "Haltestellen Vienna Sightseeing");
     overlay.addTo(map);
-
-    L.geoJSON(geojson, {
-        pointToLayer: function(geoJsonPoint, latlng){
-            return L.Marker(latlng);
-        }
-    }).addTo(overlay);
+   
+    L.geoJSON(geojson).addTo(overlay);
 }
 //loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
 

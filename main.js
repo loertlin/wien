@@ -2,9 +2,9 @@
 
 
 let stephansdom = {
-lat: 48.208493,
-lng: 16.373118,
-title: "Stephansdom",
+    lat: 48.208493,
+    lng: 16.373118,
+    title: "Stephansdom",
 };
 
 let startLayer = L.tileLayer.provider("BasemapAT.grau")
@@ -18,7 +18,7 @@ let map = L.map("map", {
 });
 
 let layerControl = L.control.layers({
-    "BasemapAT Grau": startLayer, 
+    "BasemapAT Grau": startLayer,
     "Basemap Standard": L.tileLayer.provider("BasemapAT.basemap"),
     "Basemap Overlay": L.tileLayer.provider("BasemapAT.overlay"),
     "Basemap Terrain": L.tileLayer.provider("BasemapAT.terrain"),
@@ -29,8 +29,8 @@ let layerControl = L.control.layers({
         L.tileLayer.provider("BasemapAT.orthofoto"),
         L.tileLayer.provider("BasemapAT.overlay"),
     ])
-    
-}).addTo(map); 
+
+}).addTo(map);
 
 
 /*damit control gleich schon ausgerollt ist*/
@@ -63,7 +63,7 @@ let miniMap = new L.Control.MiniMap(
 //async bedeutet, dass der code weitergeht, obwohls noch nicht fertiggeladen ist
 //sehenswürdigkeiten
 async function loadSites(url) {
-    let response = await fetch (url);
+    let response = await fetch(url);
     let geojson = await response.json();
     //console.log(geojson);
 
@@ -72,7 +72,7 @@ async function loadSites(url) {
     overlay.addTo(map);
 
     L.geoJSON(geojson, {
-        pointToLayer: function(geoJsonPoint, latlng) {
+        pointToLayer: function (geoJsonPoint, latlng) {
             //L.marker(latlng).addTo(map)
             //console.log(geoJsonPoint.properties.NAME);
             let popup = `
@@ -86,8 +86,8 @@ async function loadSites(url) {
             return L.marker(latlng, {
                 icon: L.icon({
                     iconUrl: "icons/photo.png",
-                    iconAnchor: [16,37],
-                    popupAnchor: [0,-37]
+                    iconAnchor: [16, 37],
+                    popupAnchor: [0, -37]
                 })
             }).bindPopup(popup);
         }
@@ -104,16 +104,16 @@ loadSites("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&vers
 
 //Haltestellen
 async function loadStops(url) {
-    let response = await fetch (url);
+    let response = await fetch(url);
     let geojson = await response.json();
     //console.log(geojson);
 
     let overlay = L.featureGroup();
     layerControl.addOverlay(overlay, "Haltestellen Vienna Sightseeing");
     overlay.addTo(map);
-   
+
     L.geoJSON(geojson, {
-        pointToLayer: function(geoJsonPoint, latlng) {
+        pointToLayer: function (geoJsonPoint, latlng) {
             //L.marker(latlng).addTo(map)
             console.log(geoJsonPoint.properties);
             let popup = `
@@ -123,8 +123,8 @@ async function loadStops(url) {
             return L.marker(latlng, {
                 icon: L.icon({
                     iconUrl: `icons/bus_${geoJsonPoint.properties.LINE_ID}.png`,
-                    iconAnchor: [16,37],
-                    popupAnchor: [0,-37]
+                    iconAnchor: [16, 37],
+                    popupAnchor: [0, -37]
                 })
             }).bindPopup(popup);
         }
@@ -137,7 +137,7 @@ loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&vers
 
 //Liniennetz
 async function loadLines(url) {
-    let response = await fetch (url);
+    let response = await fetch(url);
     let geojson = await response.json();
     //console.log(geojson);
 
@@ -151,7 +151,7 @@ async function loadLines(url) {
 
 //Fußgängerzonen
 async function loadZones(url) {
-    let response = await fetch (url);
+    let response = await fetch(url);
     let geojson = await response.json();
     //console.log(geojson);
 
@@ -165,7 +165,7 @@ async function loadZones(url) {
 
 //Hotels und Unterkünfte
 async function loadHotels(url) {
-    let response = await fetch (url);
+    let response = await fetch(url);
     let geojson = await response.json();
     //console.log(geojson);
 
@@ -176,4 +176,3 @@ async function loadHotels(url) {
     L.geoJSON(geojson).addTo(overlay);
 }
 //loadHotels("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:UNTERKUNFTOGD&srsName=EPSG:4326&outputFormat=json");
-

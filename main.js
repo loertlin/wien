@@ -79,10 +79,12 @@ async function loadSites(url) {
                 alt = ""><br>
                 <strong>${geoJsonPoint.properties.NAME}</strong>
                 <hr>
-                Adresse: ${geoJsonPoint.properties.Adresse}<br>
-                <a href="${geoJsonPoint.properties.WEITERE_INFO}">Weblink</a>
+                Adresse: ${geoJsonPoint.properties.ADRESSE}<br>
+                <a href="${geoJsonPoint.properties.WEITERE_INF}">Weblink</a>
             `;
-            return L.Marker(latlng).bindPopup(popup);
+            return L.marker(latlng{
+                
+            }).bindPopup(popup);
         }
 
     }).addTo(overlay);

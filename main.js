@@ -91,7 +91,11 @@ async function loadStops(url) {
     layerControl.addOverlay(overlay, "Haltestellen Vienna Sightseeing");
     overlay.addTo(map);
 
-    L.geoJSON(geojson).addTo(overlay);
+    L.geoJSON(geojson, {
+        pointToLayer: function(geoJsonPoint, latlng){
+            return L.Marker(latlng);
+        }
+    }).addTo(overlay);
 }
 //loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
 

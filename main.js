@@ -61,6 +61,7 @@ let miniMap = new L.Control.MiniMap(
 
 // sämmliche daten vom der webseite der stadt wien können verwendet werden
 //async bedeutet, dass der code weitergeht, obwohls noch nicht fertiggeladen ist
+//sehenswürdigkeiten
 async function loadSites(url) {
     let response = await fetch (url);
     let geojson = await response.json();

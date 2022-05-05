@@ -115,14 +115,14 @@ async function loadStops(url) {
     L.geoJSON(geojson, {
         pointToLayer: function(geoJsonPoint, latlng) {
             //L.marker(latlng).addTo(map)
-            //console.log(geoJsonPoint.properties);
+            console.log(geoJsonPoint.properties);
             let popup = `
             <strong>${geoJsonPoint.properties.LINE_NAME}</strong><br>
             Station ${geoJsonPoint.properties.STAT_NAME}
             `;
             return L.marker(latlng, {
                 icon: L.icon({
-                    iconUrl: "icons/bus.png",
+                    iconUrl: `icons/bus_${geoJsonPoint.properties.LINE_ID}.png`,
                     iconAnchor: [16,37],
                     popupAnchor: [0,-37]
                 })

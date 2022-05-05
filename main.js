@@ -74,3 +74,68 @@ async function loadSites(url) {
     L.geoJSON(geojson).addTo(overlay);
 }
 loadSites("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
+
+
+//Haltestellen
+//smarte Variante: layername noch reinstellen
+//loadSites("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json", "Haltestellen Vienna Sightseeing");
+
+
+//Haltestellen
+async function loadStops(url) {
+    let response = await fetch (url);
+    let geojson = await response.json();
+    //console.log(geojson);
+
+    let overlay = L.featureGroup();
+    layerControl.addOverlay(overlay, "Haltestellen Vienna Sightseeing");
+    overlay.addTo(map);
+
+    L.geoJSON(geojson).addTo(overlay);
+}
+loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
+
+
+
+//Liniennetz
+async function loadLines(url) {
+    let response = await fetch (url);
+    let geojson = await response.json();
+    //console.log(geojson);
+
+    let overlay = L.featureGroup();
+    layerControl.addOverlay(overlay, "Liniennetz Vienna Sightseeing");
+    overlay.addTo(map);
+
+    L.geoJSON(geojson).addTo(overlay);
+}
+loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
+
+//Fußgängerzonen
+async function loadZones(url) {
+    let response = await fetch (url);
+    let geojson = await response.json();
+    //console.log(geojson);
+
+    let overlay = L.featureGroup();
+    layerControl.addOverlay(overlay, "Fußgängerzonen");
+    overlay.addTo(map);
+
+    L.geoJSON(geojson).addTo(overlay);
+}
+loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
+
+//Hotels und Unterkünfte
+async function loadHotels(url) {
+    let response = await fetch (url);
+    let geojson = await response.json();
+    //console.log(geojson);
+
+    let overlay = L.featureGroup();
+    layerControl.addOverlay(overlay, "Hotels und Unterkünfte");
+    overlay.addTo(map);
+
+    L.geoJSON(geojson).addTo(overlay);
+}
+loadHotels("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:UNTERKUNFTOGD&srsName=EPSG:4326&outputFormat=json");
+

@@ -176,7 +176,7 @@ async function loadHotels(url) {
     L.geoJSON(geojson, {
         pointToLayer: function (geoJsonPoint, latlng) {
             //L.marker(latlng).addTo(map)
-            console.log(geoJsonPoint.properties);
+            //console.log(geoJsonPoint.properties);
             let popup = `
             <strong>${geoJsonPoint.properties.BETRIEB}</strong><br>
             <hr>

@@ -225,6 +225,7 @@ async function loadHotels(url) {
             //L.marker(latlng).addTo(map)
             let searchList = document.querySelector("#searchList");
             searchList.innerHTML += `<option value="${geoJsonPoint.properties.BETRIEB}"</option>`;
+            
             //console.log(document.querySelector("#searchList")) //Raute verweist auf ID
             //console.log(`<option value="${geoJsonPoint.properties.BETRIEB}"</option>`);
 
@@ -272,6 +273,11 @@ async function loadHotels(url) {
 
 
     }).addTo(overlay);
+
+    let form = document.querySelector("#searchForm");
+    form.suchen.onclick = function() {
+        console.log(form.hotel.value);
+    }
 }
 
 loadHotels("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:UNTERKUNFTOGD&srsName=EPSG:4326&outputFormat=json");

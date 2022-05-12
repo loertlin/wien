@@ -147,7 +147,7 @@ async function loadLines(url) {
 
     //wenn auf die Linie geklickt wird, erscheint die Line
     L.geoJSON(geojson, {
-        style: function(feature) {
+        style: function (feature) {
             //console.log(feature)
             //farbe von http://clrs.cc/
             let colors = {
@@ -163,7 +163,7 @@ async function loadLines(url) {
                 color: `${colors[feature.properties.LINE_NAME]}`,
                 weight: 4,
                 //10 pxl strich, 6 pxl lücke, 10 pxl strich, 6 pxl lücke etc.
-                dashArray: [10,6]
+                dashArray: [10, 6]
             }
         }
     }).bindPopup(function (layer) {
@@ -187,19 +187,18 @@ async function loadZones(url) {
     let overlay = L.featureGroup();
     layerControl.addOverlay(overlay, "Fußgängerzonen");
     overlay.addTo(map);
-//|| "" --> was stattdessen reingeschrieben werden soll 
+    //|| "" --> was stattdessen reingeschrieben werden soll 
     L.geoJSON(geojson, {
-        style: function(feature) {
+        style: function (feature) {
             return {
                 color: "#F012BE",
                 weigth: 1,
                 opacity: 0.1,
                 fillOpacity: 0.1
-
             }
         }
     }).bindPopup(function (layer) {
-    return `
+        return `
         <h4>Fußgängerzone${layer.feature.properties.ADRESSE}</h4>
 
         <p>${layer.feature.properties.ZEITRAUM || ""}</p> 

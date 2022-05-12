@@ -149,7 +149,7 @@ async function loadLines(url) {
     L.geoJSON(geojson, {
         style: function(feature) {
             //console.log(feature)
-
+            //farbe von http://clrs.cc/
             let colors = {
                 "Red Line": "#FF4136",
                 "Yellow Line": "#FFDC00",
@@ -160,7 +160,10 @@ async function loadLines(url) {
             };
 
             return {
-                color: `${colors[feature.properties.LINE_NAME]}`
+                color: `${colors[feature.properties.LINE_NAME]}`,
+                weight: 4,
+                //10 pxl strich, 6 pxl lücke, 10 pxl strich, 6 pxl lücke etc.
+                dashArray: [10,6]
             }
         }
     }).bindPopup(function (layer) {

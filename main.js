@@ -225,7 +225,7 @@ async function loadHotels(url) {
             //L.marker(latlng).addTo(map)
             let searchList = document.querySelector("#searchList");
             searchList.innerHTML += `<option value="${geoJsonPoint.properties.BETRIEB}"</option>`;
-            
+
             //console.log(document.querySelector("#searchList")) //Raute verweist auf ID
             //console.log(`<option value="${geoJsonPoint.properties.BETRIEB}"</option>`);
 
@@ -275,13 +275,19 @@ async function loadHotels(url) {
     }).addTo(overlay);
 
     let form = document.querySelector("#searchForm");
-    form.suchen.onclick = function() {
+    form.suchen.onclick = function () {
         console.log(form.hotel.value);
-        hotelsLayer.eachLayer(function(marker){
-            console.log(marker)
-            console.log(marker.getLatLng())
-            console.log(marker.getPopup())
-            console.log(marker.feature.properties.BETRIEB)
+        hotelsLayer.eachLayer(function (marker) {
+            //console.log(marker)
+
+
+            if (form.hotel.value == marker.feature.properties.BETRIEB) {
+                //console.log(marker.getLatLng())
+                map.setView(marker.getLatLng(), 17)
+                marker.openPopup();
+                //console.log(marker.getPopup())
+                //console.log(marker.feature.properties.BETRIEB)
+            }
         })
     }
 }

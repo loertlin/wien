@@ -182,15 +182,32 @@ loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&vers
 async function loadZones(url) {
     let response = await fetch(url);
     let geojson = await response.json();
-    //console.log(geojson);
+    console.log(geojson);
 
     let overlay = L.featureGroup();
     layerControl.addOverlay(overlay, "Fußgängerzonen");
     overlay.addTo(map);
+//|| "" --> was stattdessen reingeschrieben werden soll 
+    L.geoJSON(geojson, {
+        style: function(feature) {
+            return {
+                color: "#F012BE",
+                weigth: 1,
+                opacity: 0.1,
+                fillOpacity: 0.1
 
-    L.geoJSON(geojson).addTo(overlay);
+            }
+        }
+    }).bindPopup(function (layer) {
+    return `
+        <h4>Fußgängerzone${layer.feature.properties.ADRESSE}</h4>
+
+        <p>${layer.feature.properties.ZEITRAUM || ""}</p> 
+        <p>${layer.feature.properties.AUSN_TEXT || ""}</p>
+    `;
+    }).addTo(overlay);
 }
-//loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
+loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
 
 //Hotels und Unterkünfte
 async function loadHotels(url) {
